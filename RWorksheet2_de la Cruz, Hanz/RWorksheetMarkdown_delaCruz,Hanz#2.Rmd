@@ -1,0 +1,212 @@
+---
+title: "RWorksheet2 Markdown"
+output:
+  html_document: default
+  pdf_document: default
+date: "2023-09-27"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+sys.source ("C:/Users/63927/Downloads/Lab 2 worksheet/RWorksheet2_de la CRuz, Hanz/RWorksheet_delaCruz,Hanz#2.R", envir = knitr::knit_global())
+```
+```{r number1a}
+#number 1a
+sequence1 <- (-5:5) # the output is the numbers from -5 to 5 
+sequence1 #[1] -5 -4 -3 -2 -1  0  1  2  3  4  5
+```
+
+
+```{r number1b}
+#number 1b
+x <- 1:7 #[1] 1 2 3 4 5 6 7
+x # the value of x is the numbers from 1 to 7
+```
+```{r number2}
+#number 2
+seqBy2 <- seq(1,3, by = 0.2) 
+seqBy2 # The output is the numbers from 1 to 3 with a 0.2 increment in each element
+```
+
+```{r number3}
+ageList <- list(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27,
+                22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 43, 53, 41, 51, 35,
+                24,33, 41, 53, 40, 18, 44, 38, 41, 48, 27, 39, 19, 30, 61, 54, 58, 26,
+                18)
+```
+
+```{r number3a}
+#number 3a
+ageList [3] #the value of the 3rd element is 22
+```
+
+```{r number3b}
+#number 3b
+ageList [c(2,4)] # the value of the 2nd element is 28 and the value of the 4th element is 36
+```
+
+```{r number3c}
+#number 3c
+ageListMinus <- ageList[-c(4,12)]
+ageListMinus
+```
+
+```{r number4}
+x2 <- c("first"=3, "second"=0, "third"=9)
+```
+
+```{r number4a}
+#number 4a and 4b
+print (x2)
+x2 [c("first", "third")] # #the value that was put into the element is printed below the concatenated elements
+```
+
+```{r number5}
+#number 5
+sequence3 <- (-3:2)
+sequence3 [2] <- 0
+sequence3 #the 2nd element in the vector was changed to 0 
+```
+
+```{r number 6a}
+#number 6a
+fuel_data <- data.frame(
+  Month = c("Jan", "Feb","March","Apr","May","June"),
+  Price_per_Liter_PhP = c(52.50,57.25,60.00,65.00,74.25,54.00),
+  Purchase_quantity_Liters = c(25,30,40,50,10,45))
+print (fuel_data) ## the average fuel expenditure of Mr. Cruz from January to June is 59.2625
+```
+
+```{r number 6b}
+#number 6b
+
+weighted_mean <- weighted.mean(fuel_data$Price_per_Liter_PhP, 
+                               fuel_data$Purchase_quantity_Liters)
+print (weighted_mean)
+```
+
+```{r number7}
+#number 7
+rivers
+sevenElements <- c(length(rivers), sum(rivers), mean(rivers), median(rivers), var(rivers),
+          sd(rivers), min(rivers), max(rivers))
+print (sevenElements)
+#The length of the rivers data set is 141
+#The sum of the rivers data set is 83357
+#The mean of the rivers data set is 591.1844 
+#The median of the rivers data set is 
+#The variance of the rivers data set is 243908.4086
+#The standard deviation of the rivers data set is 493.8708
+#The minimum number of the rivers data set is 135.0000 
+#The maximum number of the rivers data set is 3710
+```
+
+```{r number 8a}
+#number 8
+PowerCeleb <- data.frame (Power_Ranking = (1:25),
+                          Celebrity_Name = c("Tom Cruise", "Rolling  Stones",
+                                             "Oprah Winfrey", "U2", "Tiger Woods", "Steven Speilberg", "Howard Stern",
+                                             "50 Cent", "Cast of the Sopranos", "Dan Brown", "Bruce Springsteen",
+                                             "Donald Trump", "Muhammad Ali", "Paul McCcartney", "George Lucas",
+                                             "Elton John","David Letterman", "Phil Mickelson", "J.K Rowling",
+                                             "Bradd Pitt", "Peter Jackson", "Dr. Phil McGraw", "Jay Lenon",
+                                             "Celine Dion", "Kobe Bryant"),
+                          
+                          Pay = c(67,90,225,110,90,332,302,41,52,88,55,44,55,40,233,34
+                                  ,40,47,75,25,39,45,32,40,31))
+print (PowerCeleb)
+```
+
+```{r number8b}
+#number 8b 
+# Find the index of J.K. Rowling in the data frame
+jk_rowling_index <- which(PowerCeleb$Celebrity_Name == "J.K Rowling")
+
+# Modify the power ranking and pay for J.K. Rowling
+PowerCeleb[jk_rowling_index, "Power_Ranking"] <- 15
+PowerCeleb[jk_rowling_index, "Pay"] <- 90
+
+
+print (PowerCeleb)
+```
+
+```{r number8c}
+#number 8c 
+csv_file <- "PowerRankings.csv"
+
+# Export the data frame to CSV
+write.csv(PowerCeleb, file = csv_file, row.names = FALSE)
+```
+
+```{r number8d}
+#number 8d
+PowerRankingsCSV <- read.csv("PowerRankings.csv")
+
+subset_PowerRankings <- PowerRankingsCSV[10:20,]
+subset_PowerRankings
+
+save(subset_PowerRankings, file = "Ranks.RData")
+load("Ranks.RData")
+View(subset_PowerRankings)## The output of this line of code are the ten elements from index 10 to 20 columns
+```
+
+``` {r number9a}
+#number 9a
+library (readxl)
+hotelsData  <- read_excel("hotels-vienna.xlsx")
+print (hotelsData)
+```
+
+```{r number9b}
+#number 9b
+hotelDim <- dim(hotelsData)
+print (hotelDim) #The dimensions of hotelsData are 428 rows and 24 columns
+```
+
+```{r number9c}
+#number 9c
+selectedColumns <-  hotelsData[1:428,c(1,6,7,9,22,24)]
+print (selectedColumns)
+```
+
+```{r number9d}
+#number 9d
+write.csv(selectedColumns, file = "new3.csv") #susbstituted for RData since it does not load
+new <- load("new.RData") #load("C:/Users/63927/Downloads/Lab 2 worksheet/RWorksheet2_de la CRuz, Hanz/new1.RData")
+new <- as.data.frame(load("new1.RData")) 
+```
+
+```{r number9e}
+#number 9e
+displayHeader <- head(selectedColumns)
+print (displayHeader)
+isplayTail <- tail(selectedColumns)
+print (displayTail)
+```
+
+```{r number10a}
+#number 10a
+vegList <- list("spinach", "carrots", "cabbage", "onion", "garlic", "ginger", "broccoli",
+                "pepper", "eggplant", "celery")
+print (vegList)
+```
+
+```{r number10b}
+#number 10b
+vegList2 <- append(vegList,c("peas","potato"))
+print (vegList2)
+```
+
+```{r number10c}
+#number 10c
+add5VegList <- append(vegList2, c("malunggay", "gourd", "kangkong", 
+                      "lettuce","beans"), after = 5)
+print(add5VegList)
+length(add5VegList) # there are 17 data points in the add5VegList list
+```
+
+```{r number10d}
+#number 10d
+VegListMinus <- add5VegList[-c(5,10,15)]
+print(VegListMinus)
+length(VegListMinus) # There are 14 vegetables left in this list
