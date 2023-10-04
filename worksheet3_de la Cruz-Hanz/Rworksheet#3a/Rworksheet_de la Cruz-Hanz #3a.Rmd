@@ -158,10 +158,10 @@ array1
 dimOfArray1 <- dim(array1)
 dimOfArray1 #array has 2columns 4rows and 3 dimensions
 ```
+
 ```{r renaming columns rows and dimension names}
 #renaming columns rows and dimension names
 
 dimnames(array1) <- list(letters[1:2],LETTERS[1:4], c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array"))
 array1
-
 ```
