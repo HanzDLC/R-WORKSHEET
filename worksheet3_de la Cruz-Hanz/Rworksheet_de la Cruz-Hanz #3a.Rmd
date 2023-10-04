@@ -165,3 +165,5 @@ dimnames(array1) <- list(letters[1:2],LETTERS[1:4], c("1st-Dimensional Array", "
 array1
 
 ```
+
+```
