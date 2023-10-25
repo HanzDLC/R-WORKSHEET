@@ -1,0 +1,91 @@
+---
+title: "RWorksheet_de la Cruz-Hanz#4a"
+output: pdf_document
+date: "2023-10-25"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r cars}
+ShoeSizeDF <- data.frame(
+  Shoe_size = c(6.5,9.0,8.5,8.5,10.5,7.0,9.5,9.0,13.0,
+               7.5,10.5,8.5,12.0,10.5,13.0,11.5,8.5,5.0,
+               10.0,6.5,7.5,8.5,10.5,8.5,10.5,11.0,9.0,
+               13.0),
+  
+  Height = c(66.0,68.0,64.5,65.0,70.0,64.0,70.0,71.0,
+             72.0,64.0,74.5,67.0,71.0,71.0,77.0,72.0,
+             59.0,62.0,72.0,66.0,64.0,67.0,73.0,69.0,
+             72.0,70.0,69.0,70.0),
+  Gender = c("F","F","F","F","M","F","F","F","M","F","M","F",
+             "M","M","M","M","F","F","M","F","F","M","M","F",
+             "M","M","M","M")
+  
+)
+ShoeSizeDF
+```
+```{r subset male and female}
+subsetMale <- ShoeSizeDF[ShoeSizeDF$Shoe_size &  ShoeSizeDF$Height & ShoeSizeDF$Gender == "M",]
+subsetMale
+subsetFemale <- subset(ShoeSizeDF, Gender == "F")
+subsetFemale
+```
+
+```{r mean of  shoe size}
+SizeMeanMale<- mean(subsetMale$Shoe_size) 
+SizeMeanFemale <- mean(subsetFemale$Shoe_size) 
+totalSizeMean <- mean(ShoeSizeDF$Shoe_size)
+            
+cat("The mean of shoe sizes for males is:", SizeMeanMale)
+cat("\nThe mean of the shoe sizes for females is:",SizeMeanFemale)
+cat("\nThe total mean for shoe sizes is: ", totalSizeMean)
+
+
+```
+```{r mean of height}
+HeightMeanMale <- mean(subsetMale$Height)
+HeightMeanFemale <- mean(subsetFemale$Height)
+totalHeightMean <- mean(ShoeSizeDF$Height)
+  
+cat("The mean for height of males is:", HeightMeanMale)
+cat("\nThe mean of the height of females is:",HeightMeanFemale)
+cat("\nThe total mean for height is: ", totalHeightMean)
+cat("\n\nYes, there is a relationship between height and mean. The higher the height the bigger the shoe sizes")
+```
+```{r months}
+months <- c("March","April","January","November","January",
+            "September","October","September","November","August",
+            "January","November","November","February","May","August",
+            "July","December","August","August","September","November",
+            "February","April")
+
+factor_months_vector <- factor(months)
+
+factor_months_vector
+
+```
+```{r summary}
+MonthSummary <- summary(months)
+MonthSummary
+FactorMonthSummary <- summary(factor_months_vector)
+FactorMonthSummary
+cat("\nYes, summary of both vectors are useful. They show different information such as the length, the class and modes and the values under that month")
+```
+```{r direction}
+DirectionDF = data.frame(
+              Direction = c("East","West","North"),
+              Frequency = c(1,4,3)
+              
+)
+DirectionDF
+new_order_data <- factor(DirectionDF,levels = c("East","West","North"))
+print(new_order_data)
+```
+```{r readtable}
+read.table(file="import_march.csv",sep = ",",header = TRUE, as.is=TRUE )
+```
+
