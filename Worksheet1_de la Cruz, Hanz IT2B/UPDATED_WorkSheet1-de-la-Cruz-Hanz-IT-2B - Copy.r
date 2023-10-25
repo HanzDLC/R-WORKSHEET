@@ -8,11 +8,11 @@ reciprocalValue <- 1 / age
 reciprocalValue
 #1] 0.02941176 0.03571429 0.04545455 0.02777778 0.03703704 0.05555556
 #[7] 0.01923077 0.02564103 0.02380952 0.03448276 0.02857143 0.03225806
-#[13] 0.03703704 0.04545455 0.02702703 0.02941176 0.05263158 0.05000000
+#[13] 0.03703704 0.04545455 0.02702703 0.02941176 0.05263158 0.05000000q
 #[19] 0.01754386 0.02040816 0.02000000 0.02702703 0.02173913 0.04000000
 #[25] 0.05882353 0.02702703 0.02380952 0.01886792 0.02439024 0.01960784
 #[31] 0.02857143 0.04166667 0.03030303 0.02439024
-  
+
 new_age <- c(age, 0, age) 
 new_age # there is a zero in between the two age vectors
 #[1] 34 28 22 36 27 18 52 39 42 29 35 31 27 22 37 34 19 20 57 49 50 37 46
@@ -93,7 +93,11 @@ length(dataPointMultiples) #there are 2 data points in the 10:11
 
 
 BlocksofCode <- {  
+<<<<<<<< HEAD:Worksheet1_de la Cruz, Hanz IT2B/UPDATED_WorkSheet1-de-la-Cruz-Hanz-IT-2B - Copy.r
 x <- 0 + x + 5 
+========
+  x <- 0 + x + 5 
+>>>>>>>> 6da536dd172a66be9a3c3b6fca2387bc60519f52:Worksheet1_de la Cruz, Hanz IT2B/WorkSheet1-de-la-Cruz-Hanz-IT-2B.r
 }  # The amount adds 5 each time I run the program
 BlocksofCode
 
