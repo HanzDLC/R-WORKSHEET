@@ -1,0 +1,169 @@
+---
+title: "RWORSHEET 4B"
+output: pdf_document
+date: "2023-11-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r 5x5 }
+vectorA <- c(1, 2, 3, 4, 5)
+matrixA <- matrix(0, nrow = 5, ncol = 5)
+
+
+for (i in 1:5) {
+  for (j in 1:5) {
+    matrixA[i, j] <- abs(vectorA[i] - vectorA[j])
+  }
+}
+
+matrixA
+```
+```{r asterisk}
+
+for (i in 1:5){
+    cat(rep("*",i), collapse = "\n")
+    }
+
+```
+
+```{r fibonacci}
+
+fib1 <- as.numeric(readline(prompt = "Enter a number to start the Fibonacci sequence: "))
+
+num1 <- fib1
+num2 <- fib1
+
+print(num1)
+
+repeat {
+  next_num <- num1 + num2
+  if (!is.na(next_num) && next_num > 500) {
+    break
+  }
+  print(next_num)
+  num1 <- num2
+  num2 <- next_num
+}
+
+```
+
+```{r importding csv file}
+ShoeSizeDF <- data.frame(
+  Shoe_size = c(6.5,9.0,8.5,8.5,10.5,7.0,9.5,9.0,13.0,
+               7.5,10.5,8.5,12.0,10.5,13.0,11.5,8.5,5.0,
+               10.0,6.5,7.5,8.5,10.5,8.5,10.5,11.0,9.0,
+               13.0),
+  
+  Height = c(66.0,68.0,64.5,65.0,70.0,64.0,70.0,71.0,
+             72.0,64.0,74.5,67.0,71.0,71.0,77.0,72.0,
+             59.0,62.0,72.0,66.0,64.0,67.0,73.0,69.0,
+             72.0,70.0,69.0,70.0),
+  Gender = c("F","F","F","F","M","F","F","F","M","F","M","F",
+             "M","M","M","M","F","F","M","F","F","M","M","F",
+             "M","M","M","M")
+  
+)
+write.csv(ShoeSizeDF, file = "shoesize.csv", row.names = FALSE)
+
+```
+
+```{r importing csv file}
+shoeSizeCSV <- read.csv("shoesize.csv")
+shoeSizeCSV
+
+```
+
+```{r subsets}
+  Fsubset <- subset(shoeSizeCSV, Gender == "F")
+  Msubset <- subset(shoeSizeCSV, Gender == "M")
+  
+ FRowNum <- nrow(Fsubset)
+ MRowNum <- nrow(Msubset)
+ 
+ 
+ cat("Number of observations for Female:", FRowNum,"\n")
+ cat("Number of observations for Male:", MRowNum, "\n")
+  
+```
+
+```{r plotting}
+sexCounts  <- c(FRowNum, MRowNum)
+sexLabels <- c("Female", "Male")
+plot1 <- barplot(sexCounts, names.arg = sexLabels,
+        main = "Number of Males and Females in Household Data",
+        xlab = "Sex", ylab = "Count",
+        col = c("green", "blue"),
+        legend.text = sexLabels,
+        args.legend = list(x = "topright", bty = "n")
+)
+plot1
+```
+```{r piechart}
+incomeDF <- data.frame(
+  Expenses = c("Food", "Electricity", "Savings", "Miscellaneous"),
+  Amount = c(60, 10, 5, 25)
+)
+incomeDF
+
+pie(incomeDF$Amount, labels = incomeDF$Category, col = c("brown", "purple", "yellow", "blue"),
+    main = "Distribution of Income")
+
+```
+
+```{r iris dataset}
+str("iris")
+cat("data set iris is in character structure")
+
+```
+
+```{r meandataset}
+mean_sepal_length <- mean(iris$Sepal.Length)
+mean_sepal_width <- mean(iris$Sepal.Width)
+mean_petal_length <- mean(iris$Petal.Length)
+mean_petal_width <- mean(iris$Petal.Width)
+
+
+```
+
+```{r species pieChart}
+species <- table(iris$Species)
+pie(species, main = "Species Distribution in Iris Dataset",
+    labels = c("Setosa", "Versicolor", "Virginica"),
+    col = c("lightblue", "lightgreen", "lightyellow"),
+    clockwise = TRUE)
+
+
+```
+
+```{r species subset}
+subset_Setosa <- subset(iris, Species == "setosa")
+subset_Versicolor<- subset(iris, Species == "versicolor")
+subset_virginica <- subset(iris, Species == "virginica")
+
+last_6_setosa <-tail(subset(iris, Species == "setosa"))
+last_6_Versicolor <- tail(subset(iris, Species == "versicolor"))
+last_6_virginica <- tail(subset(iris, Species == "virginica"))
+
+last6subsetSpeciesDF <- rbind(last_6_setosa, last_6_Versicolor, last_6_virginica)
+last6subsetSpeciesDF
+```
+```{r scatterplot for iris }
+library(ggplot2)
+data(iris)
+
+iris$species <- as.factor(iris$species)
+
+ggplot(iris, aes(x = sepal.length, y = sepal.width, color = species, shape = species)) +
+  geom_point(size = 3) +
+  labs(title = "Iris Dataset",
+       subtitle = "Sepal width and length",
+       x = "Sepal Length",
+       y = "Sepal Width") +
+  scale_color_manual(values = c("red", "green", "blue"), 
+                     labels = c("Setosa", "Versicolor", "Virginica")) +
+  scale_shape_manual(values = c(1, 2, 16),
+                     labels = c("Setosa", "Versicolor", "Virginica"))
+```
