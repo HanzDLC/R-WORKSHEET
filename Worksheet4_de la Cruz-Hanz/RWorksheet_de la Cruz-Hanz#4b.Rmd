@@ -108,7 +108,7 @@ incomeDF <- data.frame(
 )
 incomeDF
 
-pie(incomeDF$Amount, labels = incomeDF$Category, col = c("brown", "purple", "yellow", "blue"),
+pie(incomeDF$Amount, labels = incomeDF$Category, col = c("red", "green", "yellow", "blue"),
     main = "Distribution of Income")
 
 ```
@@ -132,7 +132,7 @@ mean_petal_width <- mean(iris$Petal.Width)
 species <- table(iris$Species)
 pie(species, main = "Species Distribution in Iris Dataset",
     labels = c("Setosa", "Versicolor", "Virginica"),
-    col = c("lightblue", "lightgreen", "lightyellow"),
+    col = c("blue", "lightgreen", "yellow"),
     clockwise = TRUE)
 
 
@@ -151,19 +151,33 @@ last6subsetSpeciesDF <- rbind(last_6_setosa, last_6_Versicolor, last_6_virginica
 last6subsetSpeciesDF
 ```
 ```{r scatterplot for iris }
-library(ggplot2)
+
 data(iris)
+subiris <- iris[,1:2]
 
-iris$species <- as.factor(iris$species)
+plot(subiris,
+     pch = as.integer(iris$Species),
+     col = as.integer(iris$Species)+9)
+     
+```
+```{r factor iris}
+IrisFactor <- factor(iris$Species)   
+IrisFactor
+cat("This will display the character values of the species column and the levels")
+```
+```{r alexa files}
+library("readxl")
+alexaDF <- read_excel("alexa_file.xlsx")
 
-ggplot(iris, aes(x = sepal.length, y = sepal.width, color = species, shape = species)) +
-  geom_point(size = 3) +
-  labs(title = "Iris Dataset",
-       subtitle = "Sepal width and length",
-       x = "Sepal Length",
-       y = "Sepal Width") +
-  scale_color_manual(values = c("red", "green", "blue"), 
-                     labels = c("Setosa", "Versicolor", "Virginica")) +
-  scale_shape_manual(values = c(1, 2, 16),
-                     labels = c("Setosa", "Versicolor", "Virginica"))
+oldName = c("Black  Dot","Black  Plus","Black  Show","Black  Spot","White  Dot", "White  Plus", "White  Show", "White  Spot")
+newName = c("Black Dot","Black Plus","Black Show","Black Spot","White Dot", "White Plus", "White Show", "White Spot")
+alexaDF$variation <- gsub("Black  Dot","Black Dot",alexaDF$variation)
+                     gsub("Black  Plus","Black Plus",alexaDF$variation)
+                     gsub("Black  Show","Black Show",alexaDF$variation)
+                     gsub("Black  Spot","Black Spot",alexaDF$variation)
+                     
+alexaDF
+```
+```{r knit graphics}
+knitr::include_graphics("C:/Users/63927/Downloads/Lab 2 worksheet/R-WORKSHEET/Worksheet4_de la Cruz-Hanz/dice.png")
 ```
