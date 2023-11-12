@@ -172,12 +172,39 @@ alexaDF <- read_excel("alexa_file.xlsx")
 oldName = c("Black  Dot","Black  Plus","Black  Show","Black  Spot","White  Dot", "White  Plus", "White  Show", "White  Spot")
 newName = c("Black Dot","Black Plus","Black Show","Black Spot","White Dot", "White Plus", "White Show", "White Spot")
 alexaDF$variation <- gsub("Black  Dot","Black Dot",alexaDF$variation)
-                     gsub("Black  Plus","Black Plus",alexaDF$variation)
-                     gsub("Black  Show","Black Show",alexaDF$variation)
-                     gsub("Black  Spot","Black Spot",alexaDF$variation)
-                     
+alexaDF$variation <- gsub("Black  Plus","Black Plus",alexaDF$variation)
+alexaDF$variation <- gsub("Black  Show","Black Show",alexaDF$variation)
+alexaDF$variation <- gsub("Black  Spot","Black Spot",alexaDF$variation)
+alexaDF$variation <- gsub("White  Dot","White Dot",alexaDF$variation)
+alexaDF$variation <- gsub("White  Plus","White Plus",alexaDF$variation)
+alexaDF$variation <- gsub("White  Show","White Show",alexaDF$variation)
+alexaDF$variation <- gsub("White  Spot","White Spot",alexaDF$variation)
+                   
 alexaDF
 ```
 ```{r knit graphics}
-knitr::include_graphics("C:/Users/63927/Downloads/Lab 2 worksheet/R-WORKSHEET/Worksheet4_de la Cruz-Hanz/dice.png")
+knitr::include_graphics("dice.png")
+```
+
+```{r 123}
+values <- c(10, 6, 14)
+labels <- c(4, 6, 8)
+
+changeBarWidth <- barplot(values,
+                          names.arg = labels,
+                          main = "Change Bar Width",
+                          col = c("red", "green", "blue"),
+                          width = c(0.5,0.25,1))
+
+changeBarWidth2 <- barplot(values,
+                          names.arg = labels,
+                          main = "Change Bar Width",
+                          col = c("red", "green", "blue"),
+                          width = c(0.5,0.5,0.5),
+                          space = c(1,1,0.25))
+```
+```{r dyplyr}
+
+
+
 ```
