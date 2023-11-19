@@ -1,9 +1,9 @@
 ---
 title: "RWORSHEET 4B"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 date: "2023-11-07"
 ---
 
@@ -192,7 +192,7 @@ alexaDF
 ```
 
 ```{r knit graphics}
-knitr::include_graphics("screenshot.png")
+knitr::include_graphics("screenshot2.png")
 ```
 
 
