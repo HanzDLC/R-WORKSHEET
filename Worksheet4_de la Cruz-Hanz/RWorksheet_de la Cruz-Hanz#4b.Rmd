@@ -1,6 +1,8 @@
 ---
 title: "RWORSHEET 4B"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 date: "2023-11-07"
 ---
 
@@ -150,6 +152,7 @@ last_6_virginica <- tail(subset(iris, Species == "virginica"))
 last6subsetSpeciesDF <- rbind(last_6_setosa, last_6_Versicolor, last_6_virginica)
 last6subsetSpeciesDF
 ```
+
 ```{r scatterplot for iris }
 
 data(iris)
@@ -160,11 +163,13 @@ plot(subiris,
      col = as.integer(iris$Species)+9)
      
 ```
+
 ```{r factor iris}
 IrisFactor <- factor(iris$Species)   
 IrisFactor
 cat("This will display the character values of the species column and the levels")
 ```
+
 ```{r alexa files}
 library("readxl")
 alexaDF <- read_excel("alexa_file.xlsx")
@@ -182,8 +187,9 @@ alexaDF$variation <- gsub("White  Spot","White Spot",alexaDF$variation)
                    
 alexaDF
 ```
+
 ```{r knit graphics}
-knitr::include_graphics("dice.png")
+knitr::include_graphics("screenshot.png")
 ```
 
 ```{r 123}
@@ -203,8 +209,10 @@ changeBarWidth2 <- barplot(values,
                           width = c(0.5,0.5,0.5),
                           space = c(1,1,0.25))
 ```
-```{r dyplyr}
 
-
+```{r total variation}
+library("dplyr")
+totalVar <- count(alexaDF$variation)
+totalVar
 
 ```
