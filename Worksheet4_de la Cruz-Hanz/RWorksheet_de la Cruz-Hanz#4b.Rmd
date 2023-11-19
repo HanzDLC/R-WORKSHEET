@@ -1,6 +1,7 @@
 ---
 title: "RWORSHEET 4B"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 date: "2023-11-07"
@@ -33,8 +34,9 @@ for (i in 1:5){
 
 ```{r fibonacci}
 
-fib1 <- as.numeric(readline(prompt = "Enter a number to start the Fibonacci sequence: "))
-
+#fib1 <- as.numeric(readline(prompt = "Enter a number to start the Fibonacci sequence: ")) 
+#This code above should be the correct code but I am gonna use a value so that I am able to knit 
+fib1 <- 1
 num1 <- fib1
 num2 <- fib1
 
@@ -95,12 +97,13 @@ shoeSizeCSV
 sexCounts  <- c(FRowNum, MRowNum)
 sexLabels <- c("Female", "Male")
 plot1 <- barplot(sexCounts, names.arg = sexLabels,
-        main = "Number of Males and Females in Household Data",
-        xlab = "Sex", ylab = "Count",
-        col = c("green", "blue"),
-        legend.text = sexLabels,
-        args.legend = list(x = "topright", bty = "n")
+                 main = "Number of Males and Females in Household Data",
+                 xlab = "Sex", ylab = "Count",
+                 col = c("green", "blue"),
+                 legend.text = sexLabels,
+                 args.legend = list(x = "topright", bty = "n")
 )
+
 plot1
 ```
 ```{r piechart}
@@ -110,7 +113,7 @@ incomeDF <- data.frame(
 )
 incomeDF
 
-pie(incomeDF$Amount, labels = incomeDF$Category, col = c("red", "green", "yellow", "blue"),
+pie(incomeDF$Amount, labels = incomeDF$Expenses, col = c("red", "green", "yellow", "blue"),
     main = "Distribution of Income")
 
 ```
@@ -192,27 +195,52 @@ alexaDF
 knitr::include_graphics("screenshot.png")
 ```
 
-```{r 123}
-values <- c(10, 6, 14)
-labels <- c(4, 6, 8)
-
-changeBarWidth <- barplot(values,
-                          names.arg = labels,
-                          main = "Change Bar Width",
-                          col = c("red", "green", "blue"),
-                          width = c(0.5,0.25,1))
-
-changeBarWidth2 <- barplot(values,
-                          names.arg = labels,
-                          main = "Change Bar Width",
-                          col = c("red", "green", "blue"),
-                          width = c(0.5,0.5,0.5),
-                          space = c(1,1,0.25))
-```
 
 ```{r total variation}
+
 library("dplyr")
-totalVar <- count(alexaDF$variation)
-totalVar
+variationCount <- alexaDF %>%
+  count(variation)
+variationCount
+```
+
+```{r Rdata}
+
+save(variationCount, file = "Variations.RData")
 
 ```
+
+```{r loading variations}
+ load("variations.RData")
+```
+
+```{r variations barplot}
+
+BlackVar <- variationCount[1:5,]
+WhiteVar <- variationCount[12:16,]
+
+par(mfrow = c(1, 2))
+
+
+
+barplot(BlackVar$n, main = "Black Variants",
+        xlab = "Variants",
+        ylab = "Total Numbers",
+        col = c("red", "blue", "yellow", "green", "purple"),
+        names.arg = BlackVar$variation,
+        cex.names = 0.35) 
+
+
+
+barplot(WhiteVar$n, main = "White Variants",
+        xlab = "Variants",
+        ylab = "Total Numbers",
+        col = c("red", "blue", "yellow", "green", "purple"),
+        names.arg = WhiteVar$variation,
+        cex.names = 0.35) 
+
+```
+
+
+
+
