@@ -1,0 +1,63 @@
+---
+title: "RWorksheet#4C"
+output: pdf_document
+date: "2023-11-21"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r dataset mpg}
+mpgDF <- read.csv("mpg.csv")
+mpgDF
+##Categorical data includes the manufacturer, model name, transmission, year, number of cylinders,type of drive train, fuel type and class
+##The continuous variables are engine displacement, city miles per gallon, highway miles per gallon
+```
+
+```{r  }
+library("dplyr")
+countMPG <- mpgDF %>%
+  count(manufacturer,model)
+countMPG
+```
+
+```{r grouping unique models }
+uniqueMPG <- countMPG[c(3,6,10,12,16:22,24,26,27,29),1:3,]
+uniqueMPG
+```
+
+```{r graphing the unique models}
+
+barplot(uniqueMPG$n, main = "Unique Cars",
+        xlab = "Cars",
+        ylab = "Total Numbers",
+        names.arg = uniqueMPG$model,
+        cex.names = 0.35,
+        col = c("red","blue","green","yellow","purple"))
+```
+
+```{r ggplot unique models}
+library("ggplot2")
+number <- uniqueMPG$n
+model <-  uniqueMPG$model
+ggplot(data = uniqueMPG, 
+       aes(x= model, y= number)) +
+     geom_bar(stat='identity',fill = rainbow(15))
+   
+        
+```
+
+```{r mpg plotting}
+ggplot(mpg, aes(model,manufacturer))+ geom_point()
+#this plot is not as useful. In order to modify it we need to choose a graph that suits the data set
+```
+
+```{r plotting first 20 observations}
+first20 <- mpg[1:20,1:11]
+first20Model <- first20$model
+first20Num <- first20$n
+
+
+```
