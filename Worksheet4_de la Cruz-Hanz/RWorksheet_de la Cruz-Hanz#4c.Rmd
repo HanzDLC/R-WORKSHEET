@@ -1,6 +1,7 @@
 ---
 title: "RWorksheet#4C"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 date: "2023-11-21"
@@ -14,13 +15,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r dataset mpg}
 mpgDF <- read.csv("mpg.csv")
 mpgDF
-##Categorical data includes the manufacturer, model name, transmission, year, number of cylinders,type of drive train, fuel type and class
-##The continuous variables are engine displacement, city miles per gallon, highway miles per gallon
+
 ```
 
 ```{r  }
 library("dplyr")
 countMPG <- str(mpgDF)
+##Categorical data includes the manufacturer, model name, transmission, year, number of cylinders,type of drive train, fuel type and class
+##The continuous variables are engine displacement, city miles per gallon, highway miles per gallon
 ```
 
 ```{r grouping unique models }
@@ -71,10 +73,12 @@ uniquePlot <- ggplot(data = uniqueMPG, aes(x = model, y = n)) +
         
 ```
 
+
 ```{r mpg plotting}
 ggplot(mpg, aes(model,manufacturer))+ geom_point()
 #this plot is not as useful. In order to modify it we need to choose a graph that suits the data set
 ```
+
 
 ```{r plotting first 20 observations}
 first20 <- mpg[1:20,1:11]
@@ -92,6 +96,7 @@ ggplot(first20DF, aes(x = year, y = model)) +
       ggtitle("20 Observations: Model and Year")
   
 ```
+
 
 ```{r car models}
 carModels <- mpg %>%
@@ -111,6 +116,7 @@ first20Plot <- ggplot(first20ModDF, aes(x = Model)) +
 first20Plot
 
 ```
+
 
 ```{R cylinder }
 cylinderDisp <- ggplot(mpg, aes(x = cyl, y = displ, color = displ)) +
@@ -134,12 +140,16 @@ highwayDisp <- ggplot(mpg, aes(x = displ, y = hwy, color = cty)) +
   theme_minimal()
 highwayDisp
 ```
-```{r }
+
+
+```{r alexa observations}
 library(readxl)
 alexafileDF <- read_excel("alexa_file.xlsx")
 summary(alexafileDF)
 #Alexa has 3150 observations
 ```
+
+
 ```{r grouping the variations using dplyr}
 library(dplyr)
 totalVar <- alexafileDF %>%
@@ -148,6 +158,33 @@ totalVar <- alexafileDF %>%
 totalVar
 
 ```
+
+
+```{r traffic csv}
+trafficDF <- read.csv("traffic.csv")
+trafficDF
+
+observations <- nrow(trafficDF)
+variables <- ncol(trafficDF)
+cat("Number of observations in traffic data set:",observations, "\n")
+cat("Variables of the traffic data set:", names(trafficDF), "\n")
+DTSubset <- trafficDF[,"DateTime",]
+junctionsSubset <- trafficDF[,"Junction",]
+
+```
+
+
+```{r ggplot for traffic data set}
+library(ggplot2)
+ggplot(trafficDF, aes(x = DTSubset, y = junctionsSubset, group = Junction, color = Junction)) +
+  geom_line() +
+  labs(title = "Traffic at Junctions", x = "Time", y = "Traffic") +
+  theme_minimal()
+
+
+```
+
+
 ```{r totalVar plot}
 totalVarPlot <- ggplot(alexafileDF, aes(x = variation)) +
   geom_bar(fill = rainbow(16)) +
@@ -159,6 +196,8 @@ totalVarPlot <- ggplot(alexafileDF, aes(x = variation)) +
 totalVarPlot
 #I observed that the red variants have more counts thatn compared to white and other variants
 ```
+
+
 ```{r verified reviews}
 alexafileDF$date <- as.Date(alexafileDF$date)
 verifiedReviewsPlot <- ggplot(alexafileDF, aes(x = date, y = verified_reviews)) +
@@ -169,6 +208,8 @@ verifiedReviewsPlot <- ggplot(alexafileDF, aes(x = date, y = verified_reviews)) 
   theme_minimal()
 verifiedReviewsPlot
 ```
+
+
 ```{r variations and ratings}
 library(dplyr)
 library(ggplot2)
@@ -181,6 +222,7 @@ highestVar
 #The highest in rating is the Walnut Finish
 
 ```
+
 
 ```{R plotting variations and rating }
 varRatingPlot <- ggplot(variationRatings, aes(x = variation, y = avg_rating)) +
