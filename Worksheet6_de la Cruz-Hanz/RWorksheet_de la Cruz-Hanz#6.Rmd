@@ -17,15 +17,80 @@ When you click the **Knit** button a document will be generated that includes bo
 ```{r StudentScore}
 
 studentScoreDF <- data.frame(
-      "Student" = 1:10,
-      "Pre-test" = c(55,54,47,57,51,61,57,54,63,58),
-      "Post-test" = c(61,60,56,63,56,63,59,56,62,61))
+      Student = 1:10,
+      Pre_test = c(55,54,47,57,51,61,57,54,63,58),
+      Post_test = c(61,60,56,63,56,63,59,56,62,61))
 
 studentScoreDF
 ```
 ```{r statistics}
 library(Hmisc)
-StudentDFSummary <- Hmisc::summary(studentScoreDF$`Pre-test`)
-StudentDFSummary
+HmiscStudentDF <- describe(studentScoreDF)
+HmiscStudentDF
+```
+```{r }
+library(pastecs)
+pastecsStudentDF <- stat.desc(studentScoreDF)
+pastecsStudentDF
+
 ```
 
+```{r fertilizer}
+fertilizerLevel <- c(10, 10, 10, 20, 20, 50, 10, 20, 10, 50, 20, 50, 20, 10)
+orderedFertilizer <- factor(fertilizerLevel, ordered = TRUE)
+orderedFertilizer
+```
+```{r exercise levels}
+exerciseLevels <- c("l", "n", "n", "i", "l", "l", "n", "n", "i", "l")
+
+factorExercise <- factor(exerciseLevels, levels = c("n", "l", "i"))
+
+factorExercise
+
+subjects <- c("Subject1", "Subject2", "Subject3", "Subject4", "Subject5",
+              "Subject6", "Subject7", "Subject8", "Subject9", "Subject10")
+
+exerciseLabels <- c("light", "none", "none", "intense", "light",
+                     "light", "none", "none", "intense", "light")
+exerciseDF <- data.frame(Subject = subjects, Exercise_Level = exerciseLevels, Exercise_Label = exerciseLabels)
+exerciseDF
+```
+```{r tax accountant}
+state <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa", "qld",
+          "vic", "nsw", "vic", "qld", "qld", "sa", "tas", "sa", "nt",
+          "wa", "vic", "qld", "nsw", "nsw", "wa", "sa", "act", "nsw",
+          "vic", "vic", "act")
+
+stateFactor <- factor(state, levels = c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa"))
+
+stateFactor
+
+```
+
+```{r income tax accountant}
+incomes <- c(60, 49, 40, 61, 64, 60, 59, 54, 62, 69,
+             70, 42, 56, 61, 61, 61, 58, 51, 48, 65,
+             49, 49, 41, 48, 52, 46, 59, 46, 58, 43)
+
+meanIncomes <- tapply(incomes,stateFactor, mean)
+
+meanIncomes
+sort(meanIncomes)
+cat("\ntas has the most average income and act has the least. nt and sa share the same mean and are both in the middle")
+```
+```{r standard errors for income mean}
+statef <- factor(state, levels = c("act", "nsw", "nt", "qld", "sa", "tas", "vic", "wa"))
+
+stdError <- function(x) sqrt(var(x) / length(x))
+
+incster <- tapply(incomes, statef, stdError)
+incster
+sort(incster)
+cat("tas has the least standard error while vic has the most standard error for the income means")
+
+```
+```{r titanic dataset}
+data('Titanic')
+
+
+```
