@@ -1,6 +1,8 @@
 ---
 title: "RWorksheet_de la Cruz-Hanz#6"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 date: "2023-12-06"
 ---
 
@@ -89,8 +91,76 @@ sort(incster)
 cat("tas has the least standard error while vic has the most standard error for the income means")
 
 ```
-```{r titanic dataset}
+```{r load Titanic dataset}
 data('Titanic')
+```
 
+```{r titanic dataset}
 
+titanic_df <- as.data.frame(Titanic)
+
+survivors <- subset(titanic_df, Survived == "Yes")
+
+didNotSurvive <- subset(titanic_df, Survived == "No")
+
+survivors
+
+didNotSurvive
+```
+```{r breast cancer}
+breastcancerDF <- read.csv("breastcancer_wisconsin.csv")
+str(breastcancerDF)
+summary(breastcancerDF)
+cat("this csv file contains important information about the breast cancer and its qualities")
+View(breastcancerDF)
+
+```
+
+```{r breast cancer 2}
+# d.1 Standard error of the mean for clump thickness
+clumpThickness <- sd(breastcancerDF$clump_thickness) / sqrt(length(breastcancerDF$clump_thickness))
+cat("Standard error for clump thickness:", clumpThickness, "\n")
+
+# d.2 Coefficient of variability for Marginal Adhesion
+marginalAdhesionCV <- sd(breastcancerDF$marginal_adhesion) / mean(breastcancerDF$marginal_adhesion) * 100
+cat("Coefficient of variability for Marginal Adhesion:", marginalAdhesionCV, "\n")
+
+# d.3 Number of null values of Bare Nuclei
+nullValuesBareNuclei <- sum(is.na(breastcancerDF$bare_nucleoli))
+cat("Number of null values for Bare Nuclei:", nullValuesBareNuclei, "\n")
+
+# d.4 Mean and standard deviation for Bland Chromatin
+meanBlandChromatin <- mean(breastcancerDF$bland_chromatin)
+sdBlandChromatin <- sd(breastcancerDF$bland_chromatin)
+cat("Mean of Bland Chromatin:", meanBlandChromatin, "\n")
+cat("Standard Deviation of Bland Chromatin:", sdBlandChromatin, "\n")
+
+# d.5 Confidence interval of the mean for Uniformity of Cell Shape
+uniformityOfCellShapeCI <- t.test(breastcancerDF$shape_uniformity)$conf.int
+cat("Confidence interval of the mean for Uniformity of Cell Shape:", uniformityOfCellShapeCI, "\n")
+
+# Number of attributes
+breastCancerDFattributes <- ncol(breastcancerDF)
+cat("Number of attributes for breast cancer dataframe:", breastCancerDFattributes, "\n")
+
+# e. Percentage of respondents who are malignant
+malignantPercentage <- round((sum(breastcancerDF$class == 4) / nrow(breastcancerDF)) * 100, 2)
+cat("Percentage of respondents who are malignant:", malignantPercentage, "%\n")
+
+```
+
+```{r installing the  packages}
+
+#install.packages("AppliedPredictiveModeling")
+#install.packages("openxlsx")
+```
+
+```{r abalone dataset}
+library("AppliedPredictiveModeling")
+library(openxlsx)
+data(abalone)
+View(abalone)
+head(abalone)
+summary(abalone)
+write.xlsx(abalone, "abalone.xlsx", row.names = FALSE)
 ```
